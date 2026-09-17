@@ -1,0 +1,6 @@
+{
+  "name": "FlightClaim",
+  "description": "הגשת תביעות פיצוי על עיכובי טיסות וביטולים בנתב״ג ולפי חוק שירותי תעופה (חוק טיבי) ואמנת מונטריאול / EU261 על בסיס הצלחה בלבד",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
