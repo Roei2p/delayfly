@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - claude/project-setup-landing-apk-y52kh5
+    paths-ignore:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+      - "**.md"
   workflow_dispatch: {}
 
 permissions:
