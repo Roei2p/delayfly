@@ -18,9 +18,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 data class FlightDraftState(
-    val passengerName: String = "רועי לוי",
-    val passengerPhone: String = "054-1234567",
-    val passengerEmail: String = "roei.levy@gmail.com",
+    val passengerName: String = "",
+    val passengerPhone: String = "",
+    val passengerEmail: String = "",
     val bookingReference: String = "LY7X9K",
     val flightNumber: String = "LY001",
     val airlineName: String = "אל על (El Al)",

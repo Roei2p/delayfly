@@ -131,7 +131,70 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Step 1: Upload Boarding Pass or Select Flight
+            // Step 1: Passenger details (who the letter is written for)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("passenger_details_card"),
+                shape = RoundedCornerShape(18.dp),
+                colors = CardDefaults.cardColors(containerColor = PureWhite),
+                border = BorderStroke(1.dp, Slate300)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "1. הפרטים שלך",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp,
+                        color = AviationNavy
+                    )
+                    Text(
+                        text = "מכתב הדרישה ייכתב בשם שתזין כאן",
+                        fontSize = 11.sp,
+                        color = Slate500
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = draft.passengerName,
+                        onValueChange = { name -> viewModel.updateDraft { it.copy(passengerName = name) } },
+                        label = { Text("שם מלא", fontSize = 11.sp) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("passenger_name_field"),
+                        singleLine = true,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        OutlinedTextField(
+                            value = draft.passengerPhone,
+                            onValueChange = { phone -> viewModel.updateDraft { it.copy(passengerPhone = phone) } },
+                            label = { Text("טלפון", fontSize = 11.sp) },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("passenger_phone_field"),
+                            singleLine = true,
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        OutlinedTextField(
+                            value = draft.passengerEmail,
+                            onValueChange = { email -> viewModel.updateDraft { it.copy(passengerEmail = email) } },
+                            label = { Text("דוא\"ל", fontSize = 11.sp) },
+                            modifier = Modifier
+                                .weight(1f)
+                                .testTag("passenger_email_field"),
+                            singleLine = true,
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Step 2: Upload Boarding Pass or Select Flight
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -147,7 +210,7 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "1. כרטיס עליה למטוס (Boarding Pass)",
+                            text = "2. כרטיס עליה למטוס (Boarding Pass)",
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
                             color = AviationNavy
@@ -342,7 +405,7 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "2. משך העיכוב בטיסה",
+                            text = "3. משך העיכוב בטיסה",
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
                             color = AviationNavy
