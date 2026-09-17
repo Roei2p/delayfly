@@ -28,16 +28,16 @@ import com.example.legal.CompensationResult
 import com.example.ui.theme.*
 
 @Composable
-fun SuccessFeeNoticeBanner(modifier: Modifier = Modifier) {
+fun FreeToolNoticeBanner(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .testTag("success_fee_banner"),
+            .testTag("free_tool_banner"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = GoldLegalLight
+            containerColor = AviationSkyLight
         ),
-        border = BorderStroke(1.5.dp, GoldLegalBorder)
+        border = BorderStroke(1.5.dp, AviationSky.copy(alpha = 0.35f))
     ) {
         Row(
             modifier = Modifier
@@ -49,28 +49,28 @@ fun SuccessFeeNoticeBanner(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(44.dp)
                     .clip(CircleShape)
-                    .background(GoldLegal),
+                    .background(
+                        Brush.linearGradient(listOf(AviationBlue, AviationSky))
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.VerifiedUser,
-                    contentDescription = "Success Fee",
+                    contentDescription = null,
                     tint = PureWhite,
                     modifier = Modifier.size(24.dp)
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "המודל העסקי: עמלת הצלחה בלבד (20%)",
-                        fontWeight = FontWeight.Bold,
-                        color = AviationNavyDark,
-                        fontSize = 14.sp
-                    )
-                }
                 Text(
-                    text = "No Win – No Fee! 0 ₪ תשלום מראש. העמלה מנוכה רק לאחר שכספי הפיצוי נכנסים לחשבונך. הוצאות בנתב\"ג מוחזרות ב-100% ללא עמלה!",
+                    text = "כלי חינמי לחלוטין",
+                    fontWeight = FontWeight.Bold,
+                    color = AviationNavyDark,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "התחשיב והמכתב המשפטי מיועדים לשימושך העצמאי, ללא עלות וללא הרשמה. אתה זה ששולח ומנהל את הפנייה מול חברת התעופה.",
                     fontSize = 12.sp,
                     color = Slate700,
                     lineHeight = 16.sp
@@ -153,26 +153,6 @@ fun CompensationBreakdownCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(6.dp))
-
-            // Commission
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "עמלת טיפול והצלחה (20% רק בזכייה):",
-                    color = Slate500,
-                    fontSize = 13.sp
-                )
-                Text(
-                    text = "-${calc.commissionNis} ₪",
-                    color = DangerRed,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 13.sp
-                )
-            }
-
             if (terminalExpensesNis > 0) {
                 Spacer(modifier = Modifier.height(6.dp))
                 Row(
@@ -211,19 +191,19 @@ fun CompensationBreakdownCard(
                 ) {
                     Column {
                         Text(
-                            text = "סכום נטו לחשבון הבנק שלך:",
+                            text = "סה\"כ המגיע לך מחברת התעופה:",
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold,
                             color = Slate800
                         )
                         Text(
-                            text = "ללא תשלום מראש • ללא דמי פתיחת תיק",
+                            text = "מחשבון חינמי לשימושך האישי",
                             fontSize = 11.sp,
                             color = Slate500
                         )
                     }
                     Text(
-                        text = "${calc.netPassengerNis} ₪",
+                        text = "${calc.totalEntitlementNis} ₪",
                         fontSize = 22.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = SuccessGreen

@@ -85,10 +85,8 @@ class ClaimViewModel(
             delayReasonReported = "איחור הגעת מטוס / עיכוב תפעולי",
             distanceCategory = FlightDistance.MEDIUM,
             grossCompensationNis = 2420,
-            commissionPercent = 20,
-            commissionFeeNis = 484,
-            netPayoutNis = 1936,
             terminalExpensesNis = 120,
+            totalPayoutNis = 2540,
             status = ClaimStatus.AIRLINE_REVIEW,
             createdAt = System.currentTimeMillis() - 86400000L * 3,
             legalDemandLetter = "דרישה לפיצוי סטטוטורי לפי חוק שירותי תעופה נשלחה למחלקה המשפטית של Wizz Air."
@@ -161,10 +159,8 @@ class ClaimViewModel(
                 delayReasonReported = d.delayReasonReported,
                 distanceCategory = d.distanceCategory,
                 grossCompensationNis = calc.statutoryCompensationNis,
-                commissionPercent = calc.commissionPercent,
-                commissionFeeNis = calc.commissionNis,
-                netPayoutNis = calc.netPassengerNis,
                 terminalExpensesNis = d.terminalExpensesNis,
+                totalPayoutNis = calc.totalEntitlementNis,
                 status = ClaimStatus.LEGAL_NOTICE_SENT,
                 createdAt = System.currentTimeMillis(),
                 ticketImageUri = d.ticketImageUri
@@ -199,7 +195,7 @@ class ClaimViewModel(
             val newExpenses = claim.terminalExpensesNis + amountNis
             val updated = claim.copy(
                 terminalExpensesNis = newExpenses,
-                netPayoutNis = claim.grossCompensationNis - claim.commissionFeeNis + newExpenses
+                totalPayoutNis = claim.grossCompensationNis + newExpenses
             )
             repository.updateClaim(updated)
             if (_selectedClaim.value?.id == claim.id) {

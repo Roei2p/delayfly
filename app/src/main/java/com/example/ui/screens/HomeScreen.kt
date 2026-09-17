@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
@@ -28,7 +29,7 @@ import coil.compose.AsyncImage
 import com.example.R
 import com.example.data.model.FlightDistance
 import com.example.ui.components.CompensationBreakdownCard
-import com.example.ui.components.SuccessFeeNoticeBanner
+import com.example.ui.components.FreeToolNoticeBanner
 import com.example.ui.theme.*
 import com.example.ui.viewmodel.ClaimViewModel
 
@@ -120,13 +121,13 @@ fun HomeScreen(
             AirportLiveAlertCard(
                 delayHours = draft.delayHours,
                 flightNumber = draft.flightNumber,
-                onAddExpenseClick = { showExpenseDialog = true }
+                onAddExpenseClick = { showExpenseDialog = true },
+                onGuideClick = onNavigateToGuide
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Transparent Commission / Business Model Banner
-            SuccessFeeNoticeBanner()
+            FreeToolNoticeBanner()
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -560,7 +561,7 @@ fun HomeScreen(
                             text = if (draft.terminalExpensesNis > 0)
                                 "קבלות בנתב\"ג שנרשמו: ${draft.terminalExpensesNis} ₪ (הוסף עוד)"
                             else
-                                "קנית קפה/אוכל בנתב\"ג? הוסף קבלה להחזר מלא (0% עמלה)",
+                                "קנית קפה/אוכל בנתב\"ג? הוסף קבלה לתחשיב הפיצוי",
                             fontSize = 12.sp,
                             color = AviationBlue,
                             fontWeight = FontWeight.SemiBold
@@ -607,7 +608,7 @@ fun HomeScreen(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "טיפול מלא מול הגורמים • 0 ₪ מראש • עמלת הצלחה בלבד",
+                        text = "כלי חינמי לחלוטין • המכתב מוכן להעתקה ושליחה עצמאית",
                         fontSize = 11.sp,
                         color = AviationSkyLight
                     )
@@ -632,7 +633,7 @@ fun HomeScreen(
             text = {
                 Column {
                     Text(
-                        text = "חוק שירותי תעופה מחייב את חברת התעופה לספק מזון ושתייה לאחר שעתיים עיכוב. אם לא חילקו שוברים, שמור את הקבלה וחברת התעופה תחזיר 100% מהסכום ללא כל עמלה!",
+                        text = "חוק שירותי תעופה מחייב את חברת התעופה לספק מזון ושתייה לאחר שעתיים עיכוב. אם לא חילקו שוברים, שמור את הקבלה וחברת התעופה תחזיר את מלוא הסכום.",
                         fontSize = 12.sp,
                         color = Slate700,
                         lineHeight = 16.sp
@@ -684,13 +685,14 @@ private fun AirportLiveAlertCard(
     delayHours: Float,
     flightNumber: String,
     onAddExpenseClick: () -> Unit,
+    onGuideClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = AviationNavy),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(18.dp))
+            .background(Brush.linearGradient(listOf(AviationNavy, AviationBlue)))
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(
@@ -770,7 +772,9 @@ private fun AirportLiveAlertCard(
                 }
 
                 Surface(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { onGuideClick() },
                     shape = RoundedCornerShape(10.dp),
                     color = Slate800
                 ) {
@@ -786,7 +790,7 @@ private fun AirportLiveAlertCard(
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "מטפלים בתביעה",
+                            text = "מדריך זכויות מלא",
                             fontSize = 11.sp,
                             color = PureWhite,
                             fontWeight = FontWeight.Medium

@@ -7,9 +7,7 @@ data class CompensationResult(
     val isCancelled: Boolean,
     val distanceCategory: FlightDistance,
     val statutoryCompensationNis: Int, // The legal compensation under Aviation Law
-    val commissionPercent: Int = 20, // 20% success fee
-    val commissionNis: Int,
-    val netPassengerNis: Int, // Gross minus commission
+    val totalEntitlementNis: Int, // Statutory compensation + reimbursed terminal expenses
     val immediateTerminalRights: List<TerminalRight>,
     val lawReferenceText: String,
     val summaryHeadline: String
@@ -51,9 +49,7 @@ object CompensationCalculator {
             distanceCategory.statutoryNis
         }
 
-        val commissionPercent = 20
-        val commissionNis = (baseGrossCompensation * (commissionPercent / 100f)).toInt()
-        val netPassengerNis = baseGrossCompensation - commissionNis + terminalExpensesNis
+        val totalEntitlementNis = baseGrossCompensation + terminalExpensesNis
 
         val rights = mutableListOf<TerminalRight>()
 
@@ -61,7 +57,7 @@ object CompensationCalculator {
         rights.add(
             TerminalRight(
                 titleHe = "מזון ומשקאות (הזכות פעילה מעיכוב של שעתיים)",
-                descriptionHe = "חברת התעופה מחויבת לספק שוברים לארוחות ושתייה בטרמינל 3/1, או להחזיר 100% מכל קבלה שתשמור (ללא עמלה כלל).",
+                descriptionHe = "חברת התעופה מחויבת לספק שוברים לארוחות ושתייה בטרמינל 3/1, או להחזיר את מלוא הסכום מכל קבלה שתשמור.",
                 iconName = "restaurant",
                 isActiveNow = delayHours >= 2.0f
             )
@@ -126,9 +122,7 @@ object CompensationCalculator {
             isCancelled = isCancelled,
             distanceCategory = distanceCategory,
             statutoryCompensationNis = baseGrossCompensation,
-            commissionPercent = commissionPercent,
-            commissionNis = commissionNis,
-            netPassengerNis = netPassengerNis,
+            totalEntitlementNis = totalEntitlementNis,
             immediateTerminalRights = rights,
             lawReferenceText = lawRef,
             summaryHeadline = headline

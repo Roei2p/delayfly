@@ -208,7 +208,7 @@ fun ClaimListItemCard(
                         color = Slate700
                     )
                     Text(
-                        text = "פיצוי כולל: ${claim.grossCompensationNis} ₪ (20% עמלת הצלחה)",
+                        text = "פיצוי סטטוטורי: ${claim.grossCompensationNis} ₪",
                         fontSize = 11.sp,
                         color = Slate500
                     )
@@ -216,12 +216,12 @@ fun ClaimListItemCard(
 
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
-                        text = "נטו לחשבונך:",
+                        text = "סה\"כ המגיע לך:",
                         fontSize = 11.sp,
                         color = Slate500
                     )
                     Text(
-                        text = "${claim.netPayoutNis} ₪",
+                        text = "${claim.totalPayoutNis} ₪",
                         fontSize = 17.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = SuccessGreen

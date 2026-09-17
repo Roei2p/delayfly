@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.data.model.ClaimStatus
 import com.example.data.model.FlightClaim
 import com.example.ui.components.ClaimStatusTimeline
-import com.example.ui.components.SuccessFeeNoticeBanner
+import com.example.ui.components.FreeToolNoticeBanner
 import com.example.ui.theme.*
 import com.example.ui.viewmodel.ClaimViewModel
 
@@ -161,7 +161,7 @@ fun ClaimDetailScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "תחשיב כספי לפי חוק שירותי תעופה (הצלחה בלבד)",
+                        text = "תחשיב כספי לפי חוק שירותי תעופה",
                         fontWeight = FontWeight.Bold,
                         fontSize = 13.sp,
                         color = Slate800
@@ -174,14 +174,6 @@ fun ClaimDetailScreen(
                     ) {
                         Text("פיצוי סטטוטורי מלא:", fontSize = 13.sp, color = Slate700)
                         Text("${claim.grossCompensationNis} ₪", fontWeight = FontWeight.Bold, color = AviationNavy)
-                    }
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text("עמלת הצלחה (20% רק בזכייה):", fontSize = 13.sp, color = Slate500)
-                        Text("-${claim.commissionFeeNis} ₪", color = DangerRed, fontWeight = FontWeight.SemiBold)
                     }
 
                     if (claim.terminalExpensesNis > 0) {
@@ -204,13 +196,13 @@ fun ClaimDetailScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "סכום שיועבר לחשבונך:",
+                            text = "סה\"כ המגיע לך מהחברה:",
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
                             color = Slate900
                         )
                         Text(
-                            text = "${claim.netPayoutNis} ₪",
+                            text = "${claim.totalPayoutNis} ₪",
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 22.sp,
                             color = SuccessGreen
@@ -221,7 +213,7 @@ fun ClaimDetailScreen(
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            SuccessFeeNoticeBanner()
+            FreeToolNoticeBanner()
 
             Spacer(modifier = Modifier.height(14.dp))
 
@@ -375,7 +367,7 @@ fun ClaimDetailScreen(
                 OutlinedTextField(
                     value = expenseAmountInput,
                     onValueChange = { expenseAmountInput = it },
-                    label = { Text("סכום בש\"ח (100% החזר ללא עמלה)") },
+                    label = { Text("סכום בש\"ח (מתווסף לתחשיב הפיצוי)") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )

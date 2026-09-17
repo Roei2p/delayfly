@@ -14,11 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.ui.components.SuccessFeeNoticeBanner
+import com.example.ui.components.FreeToolNoticeBanner
 import com.example.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,10 +61,11 @@ fun NatbagRightsGuideScreen(
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             // Hero
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(18.dp),
-                colors = CardDefaults.cardColors(containerColor = AviationNavy)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(18.dp))
+                    .background(Brush.linearGradient(listOf(AviationNavy, AviationBlue)))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
@@ -84,7 +86,7 @@ fun NatbagRightsGuideScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            SuccessFeeNoticeBanner()
+            FreeToolNoticeBanner()
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -97,7 +99,7 @@ fun NatbagRightsGuideScreen(
                 iconTint = GoldLegal,
                 items = listOf(
                     "מזון ומשקאות: חברת התעופה מחויבת להעניק לך שוברים לארוחות ושתייה בטרמינל 3 או טרמינל 1.",
-                    "שמירת קבלות: אם נציגי החברה לא חילקו שוברים, שמור כל קבלה על קפה, כריך או שתייה שרכשת בנתב\"ג. חברת התעופה מחויבת להחזיר 100% מהסכום ללא עמלה!",
+                    "שמירת קבלות: אם נציגי החברה לא חילקו שוברים, שמור כל קבלה על קפה, כריך או שתייה שרכשת בנתב\"ג. חברת התעופה מחויבת להחזיר את מלוא הסכום לפי הקבלות שתצרף.",
                     "שירותי תקשורת: זכאות לשתי שיחות טלפון ומשלוח פקס/דוא\"ל."
                 )
             )

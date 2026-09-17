@@ -210,7 +210,7 @@ fun FlightClaimApp(viewModel: ClaimViewModel) {
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "מודל עמלת הצלחה (20%): לא משלמים אגורה מראש! העמלה מנוכה רק לאחר שכספי הפיצוי מועברים לחשבונך. הוצאות בנתב\"ג מוחזרות ב-100% נקי.",
+                        text = "הכלי חינמי לחלוטין: העתק את המכתב ושלח אותו בעצמך לחברת התעופה, ועקוב אחר הסטטוס במסך \"התביעות שלי\".",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = AviationBlue,

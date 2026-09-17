@@ -35,10 +35,8 @@ data class FlightClaim(
     val delayReasonReported: String = "עיכוב תפעולי",
     val distanceCategory: FlightDistance = FlightDistance.MEDIUM,
     val grossCompensationNis: Int = 2420,
-    val commissionPercent: Int = 20, // Business model: 20% success fee
-    val commissionFeeNis: Int = 484, // 20% of gross
-    val netPayoutNis: Int = 1936, // 80% to passenger
-    val terminalExpensesNis: Int = 0, // Receipts kept at Natbag (100% to passenger)
+    val terminalExpensesNis: Int = 0, // Receipts kept at Natbag, reimbursed in full
+    val totalPayoutNis: Int = 2420, // grossCompensationNis + terminalExpensesNis
     val status: ClaimStatus = ClaimStatus.SUBMITTED,
     val createdAt: Long = System.currentTimeMillis(),
     val legalDemandLetter: String = "",
